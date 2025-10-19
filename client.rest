@@ -1,22 +1,39 @@
 
 @baseUrl = http://localhost:3000
 
-### AppControllerGetHello
+# RECADOS:
+###
 
-# @name AppControllerGetHello
-GET {{baseUrl}}/home/hello
+GET {{baseUrl}}/messages/
 
-### AppControllerGetExample
+###
 
-# @name AppControllerGetExample
-GET {{baseUrl}}/home/example
+GET {{baseUrl}}/messages/1
 
-### AppControllerGetExample
+###
 
-# @name ConceptsControllerHome
-GET {{baseUrl}}/concepts
+POST {{baseUrl}}/messages/
+Content-Type: application/json
 
-### AppControllerGetExample
+{
+  "message": "Hello, this is a new message!",
+  "newKey": "93248234"
+}
 
-# @name ConceptsAutomaticControllerHome
-GET {{baseUrl}}/concepts-automatic
+###
+
+PATCH {{baseUrl}}/messages/1/
+Content-Type: application/json
+
+{
+  "message": "Hello, this is a new message!"
+}
+
+###
+
+DELETE {{baseUrl}}/messages/1/
+Content-Type: application/json
+
+{
+  "message": "This route deletes a message"
+}
