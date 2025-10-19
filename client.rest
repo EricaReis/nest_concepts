@@ -10,7 +10,7 @@ GET {{baseUrl}}/messages/
 
 ### Get Message by ID
 
-GET {{baseUrl}}/messages/1
+GET {{baseUrl}}/messages/2
 
 ### Create a New Message
 
@@ -18,17 +18,24 @@ POST {{baseUrl}}/messages/
 Content-Type: application/json
 
 {
-  "message": "Hello, this is a new message!",
-  "newKey": "93248234"
+  "text": "New message created via REST client",
+  "from": "Erica",
+  "to": "John",
+  "readed": false,
+  "date": "2025-10-19T13:38:35.777Z"
 }
 
 ### Update a Message
 
-PATCH {{baseUrl}}/messages/1/
+PATCH {{baseUrl}}/messages/2/
 Content-Type: application/json
 
 {
-  "message": "Hello, this is a new message!"
+  "text": "New message created via REST client",
+  "from": "Erica Reis",
+  "to": "John",
+  "readed": false,
+  "date": "2025-10-19T13:38:35.777Z"
 }
 
 ### Delete a Message
