@@ -6,11 +6,14 @@ import {
   HttpCode,
   HttpStatus,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   Query,
 } from '@nestjs/common';
 import { MessagesService } from './messages.service';
+import { CreateMessageDto } from './dto/create-message.dto';
+import { UpdateMessageDto } from './dto/update-message.dto';
 
 @Controller('messages')
 export class MessagesController {
@@ -30,17 +33,23 @@ export class MessagesController {
   }
 
   @Post()
-  create(@Body() body: any) {
-    return this.messagesService.create(body);
+  create(@Body() createMessageDto: CreateMessageDto) {
+    return this.messagesService.create(createMessageDto);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() body: any) {
-    return this.messagesService.update(id, body);
+  update(@Param('id') id: string, @Body() updateMessageDto: UpdateMessageDto) {
+    console.log(
+      'UpdateMessageDto',
+      updateMessageDto.constructor.name,
+      updateMessageDto instanceof UpdateMessageDto,
+    );
+    return this.messagesService.update(id, updateMessageDto);
   }
 
+  // ParseIntPipe will transform the 'id' param to number
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id', ParseIntPipe) id: number) {
     return this.messagesService.remove(id);
   }
 }

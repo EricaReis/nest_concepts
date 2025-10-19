@@ -3,6 +3,6 @@ export class Message {
   text: string;
   from: string;
   to: string;
-  readed: boolean;
+  wasRead: boolean;
   date: Date;
 }

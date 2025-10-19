@@ -20,22 +20,16 @@ Content-Type: application/json
 {
   "text": "New message created via REST client",
   "from": "Erica",
-  "to": "John",
-  "readed": false,
-  "date": "2025-10-19T13:38:35.777Z"
+  "to": "Johnny"
 }
 
 ### Update a Message
 
-PATCH {{baseUrl}}/messages/2/
+PATCH {{baseUrl}}/messages/1/
 Content-Type: application/json
 
 {
-  "text": "New message created via REST client",
-  "from": "Erica Reis",
-  "to": "John",
-  "readed": false,
-  "date": "2025-10-19T13:38:35.777Z"
+  "text": "UPDATED message text via REST client"
 }
 
 ### Delete a Message
