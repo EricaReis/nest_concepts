@@ -2,15 +2,17 @@
 @baseUrl = http://localhost:3000
 
 # RECADOS:
-###
+### Get All Messages
 
 GET {{baseUrl}}/messages/
+?limit=100
+&offset=10
 
-###
+### Get Message by ID
 
 GET {{baseUrl}}/messages/1
 
-###
+### Create a New Message
 
 POST {{baseUrl}}/messages/
 Content-Type: application/json
@@ -20,7 +22,7 @@ Content-Type: application/json
   "newKey": "93248234"
 }
 
-###
+### Update a Message
 
 PATCH {{baseUrl}}/messages/1/
 Content-Type: application/json
@@ -29,7 +31,7 @@ Content-Type: application/json
   "message": "Hello, this is a new message!"
 }
 
-###
+### Delete a Message
 
 DELETE {{baseUrl}}/messages/1/
 Content-Type: application/json
