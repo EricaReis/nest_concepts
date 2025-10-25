@@ -18,15 +18,15 @@ export class Message {
   text: string;
 
   // many messages can be from one person
-  @ManyToOne(() => Person)
+  @ManyToOne(() => Person, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
   // specify the foreign key
-  @JoinColumn({ name: 'from' })
-  from: Person;
+  @JoinColumn({ name: 'receiver' })
+  sender: Person;
 
   // many messages can be to one person
-  @ManyToOne(() => Person)
-  @JoinColumn({ name: 'to' })
-  to: Person;
+  @ManyToOne(() => Person, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
+  @JoinColumn({ name: 'sender' })
+  receiver: Person;
 
   @Column({ default: false })
   wasRead: boolean;

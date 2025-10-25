@@ -30,10 +30,10 @@ export class Person {
   updatedAt: Date;
 
   // One person can send many messages
-  @OneToMany(() => Message, message => message.from)
+  @OneToMany(() => Message, message => message.sender)
   sentMessages: Message[];
 
   // One person can receive many messages
-  @OneToMany(() => Message, message => message.to)
+  @OneToMany(() => Message, message => message.receiver)
   receivedMessages: Message[];
 }

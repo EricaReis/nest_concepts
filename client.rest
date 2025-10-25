@@ -5,12 +5,12 @@
 ### Get All Messages
 
 GET {{baseUrl}}/messages/
-?limit=100
-&offset=10
+?limit=10
+&offset=0
 
 ### Get Message by ID
 
-GET {{baseUrl}}/messages/2
+GET {{baseUrl}}/messages/26
 
 ### Create a New Message
 
@@ -19,17 +19,18 @@ Content-Type: application/json
 
 {
   "text": "New message created via REST client",
-  "from": "Erica",
-  "to": "Johnny"
+  "senderId": 11,
+  "receiverId":13
 }
 
 ### Update a Message
 
-PATCH {{baseUrl}}/messages/4/
+PATCH {{baseUrl}}/messages/28/
 Content-Type: application/json
 
 {
-  "to": "UPDATED message text via REST client"
+  "text": "Oieeee",
+  "wasRead": true
 }
 
 ### Delete a Message
@@ -56,7 +57,7 @@ Content-Type: application/json
 
 GET {{baseUrl}}/people/
 ?limit=100
-&offset=10
+&offset=0
 
 ### Get Person by ID
 
@@ -68,7 +69,7 @@ POST {{baseUrl}}/people/
 Content-Type: application/json
 
 {
-  "email": "emailtest@gmail.com",
+  "email": "emailtest1@gmail.com",
   "name": "Erica",
   "password": "123456"
 }
@@ -83,9 +84,9 @@ Content-Type: application/json
   "password": "654321"
 }
 
-### Delete a Message
+### Delete a Person
 
-DELETE {{baseUrl}}/people/3/
+DELETE {{baseUrl}}/people/9/
 Content-Type: application/json
 
 {
