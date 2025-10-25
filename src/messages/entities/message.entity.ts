@@ -1,7 +1,10 @@
+import { Person } from 'src/people/entities/person.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -14,11 +17,16 @@ export class Message {
   @Column({ type: 'varchar', length: 255 })
   text: string;
 
-  @Column({ type: 'varchar', length: 50 })
-  from: string;
+  // many messages can be from one person
+  @ManyToOne(() => Person)
+  // specify the foreign key
+  @JoinColumn({ name: 'from' })
+  from: Person;
 
-  @Column({ type: 'varchar', length: 50 })
-  to: string;
+  // many messages can be to one person
+  @ManyToOne(() => Person)
+  @JoinColumn({ name: 'to' })
+  to: Person;
 
   @Column({ default: false })
   wasRead: boolean;

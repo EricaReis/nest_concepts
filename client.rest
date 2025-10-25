@@ -25,11 +25,11 @@ Content-Type: application/json
 
 ### Update a Message
 
-PATCH {{baseUrl}}/messages/1/
+PATCH {{baseUrl}}/messages/4/
 Content-Type: application/json
 
 {
-  "text": "UPDATED message text via REST client"
+  "to": "UPDATED message text via REST client"
 }
 
 ### Delete a Message
@@ -39,4 +39,55 @@ Content-Type: application/json
 
 {
   "message": "This route deletes a message"
+}
+
+
+#
+
+
+#
+
+
+#
+
+
+# PESSOAS:
+### Get All People
+
+GET {{baseUrl}}/people/
+?limit=100
+&offset=10
+
+### Get Person by ID
+
+GET {{baseUrl}}/people/2
+
+### Create a New Person
+
+POST {{baseUrl}}/people/
+Content-Type: application/json
+
+{
+  "email": "emailtest@gmail.com",
+  "name": "Erica",
+  "password": "123456"
+}
+
+### Update a Person
+
+PATCH {{baseUrl}}/people/9/
+Content-Type: application/json
+
+{
+  "name": "Erico",
+  "password": "654321"
+}
+
+### Delete a Message
+
+DELETE {{baseUrl}}/people/3/
+Content-Type: application/json
+
+{
+  "message": "This route deletes a person"
 }

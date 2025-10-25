@@ -38,12 +38,10 @@ export class MessagesController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateMessageDto: UpdateMessageDto) {
-    console.log(
-      'UpdateMessageDto',
-      updateMessageDto.constructor.name,
-      updateMessageDto instanceof UpdateMessageDto,
-    );
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateMessageDto: UpdateMessageDto,
+  ) {
     return this.messagesService.update(id, updateMessageDto);
   }
 

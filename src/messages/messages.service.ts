@@ -12,18 +12,6 @@ export class MessagesService {
     private readonly messageRepository: Repository<Message>,
   ) {}
 
-  private lastId = 1;
-  private messages: Message[] = [
-    {
-      id: 1,
-      text: 'This is a message test',
-      from: 'Erica',
-      to: 'John',
-      wasRead: false,
-      date: new Date(),
-    },
-  ];
-
   throwNotFoundError() {
     throw new NotFoundException(`Message not found`);
   }
@@ -46,48 +34,44 @@ export class MessagesService {
     this.throwNotFoundError();
   }
 
-  create(createMessageDto: CreateMessageDto) {
-    this.lastId++;
-    const id = this.lastId;
+  async create(createMessageDto: CreateMessageDto) {
     const newMessage = {
-      id,
       ...createMessageDto,
       wasRead: false,
       date: new Date(),
     };
-    this.messages.push(newMessage);
 
-    return newMessage;
+    const message = this.messageRepository.create(newMessage);
+
+    return this.messageRepository.save(message);
   }
 
-  update(id: string, updateMessageDto: UpdateMessageDto) {
-    const messageIndex = this.messages.findIndex(item => item.id === +id);
-
-    if (messageIndex < 0) {
-      this.throwNotFoundError();
-    }
-
-    const message = this.messages[messageIndex];
-
-    this.messages[messageIndex] = {
-      ...message,
-      ...updateMessageDto,
+  async update(id: number, updateMessageDto: UpdateMessageDto) {
+    const partialUpdateMessage = {
+      wasRead: updateMessageDto?.wasRead,
+      text: updateMessageDto?.text,
     };
+    const message = await this.messageRepository.preload({
+      id,
+      ...partialUpdateMessage,
+    });
 
-    return this.messages[messageIndex];
-  }
-
-  remove(id: number) {
-    const messageIndex = this.messages.findIndex(item => item.id === +id);
-
-    if (messageIndex < 0) {
-      this.throwNotFoundError();
+    if (!message) {
+      throw new Error(`Message ${id} not found`);
     }
 
-    const message = this.messages[messageIndex];
-
-    this.messages.splice(messageIndex, 1);
+    await this.messageRepository.save(message);
 
     return message;
+  }
+
+  async remove(id: number) {
+    const message = await this.messageRepository.findOne({ where: { id } });
+
+    if (!message) {
+      throw new Error(`Message ${id} not found`);
+    }
+
+    return this.messageRepository.remove(message);
   }
 }
