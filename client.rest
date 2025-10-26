@@ -7,10 +7,11 @@
 GET {{baseUrl}}/messages/
 ?limit=10
 &offset=0
+Authorization: Bearer 123456
 
 ### Get Message by ID
 
-GET {{baseUrl}}/messages/26
+GET {{baseUrl}}/messages/28
 
 ### Create a New Message
 
