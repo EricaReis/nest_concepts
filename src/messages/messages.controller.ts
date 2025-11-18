@@ -9,6 +9,7 @@ import {
   Patch,
   Post,
   Query,
+  Req,
   UseInterceptors,
   UsePipes,
 } from '@nestjs/common';
@@ -18,6 +19,7 @@ import { UpdateMessageDto } from './dto/update-message.dto';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
 import { ParseIntIdPipe } from 'src/common/pipes/parse-int-id.pipe';
 import { AuthTokenInterceptor } from 'src/common/interceptors/auth-token.interceptor';
+import type { Request } from 'express';
 
 @Controller('messages')
 @UseInterceptors(AuthTokenInterceptor)
@@ -27,7 +29,9 @@ export class MessagesController {
 
   @HttpCode(HttpStatus.OK)
   @Get()
-  async findAll(@Query() paginationDto: PaginationDto) {
+  async findAll(@Query() paginationDto: PaginationDto, @Req() req: Request) {
+    console.log('MessageController', req['user']);
+
     const messages = await this.messagesService.findAll(paginationDto);
     return messages;
   }

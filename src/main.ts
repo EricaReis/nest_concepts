@@ -5,6 +5,7 @@ import { ParseIntIdPipe } from './common/pipes/parse-int-id.pipe';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true, // Remove properties that are not in the DTO
